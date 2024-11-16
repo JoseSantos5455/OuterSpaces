@@ -22,22 +22,13 @@ module.exports.signup = async (req, res, next) => {
     const { email, password } = req.body;
     const emailCheck = await User.findOne({ email });
     if (emailCheck)
-      return res.json({ msg: "Email already used", status: false });
+      return res.send({ msg: "Email already used", status: false });
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       email,
       password: hashedPassword,
     });
     res.send("success");
-  } catch (error) {
-    next(error);
-  }
-};
-
-module.exports.getUsers = async (req, res, next) => {
-  try {
-    const users = await User.find({});
-    res.send(users);
   } catch (error) {
     next(error);
   }
