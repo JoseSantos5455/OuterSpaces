@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./contexts/AuthContext";
 import Layout from "./pages/layout";
 import Dashboard from "./pages/dashboard";
@@ -22,7 +21,6 @@ const App = () => {
           </Routes>
         </BrowserRouter>
       </AuthProvider>
-      <ToastContainer />
     </div>
   );
 };
