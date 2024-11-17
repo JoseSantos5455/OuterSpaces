@@ -1,4 +1,4 @@
-import { Instagram, Facebook, Twitter, Telegram } from "../../component/icon";
+import { Instagram, Facebook, Twitter, Telegram } from "../../components/Icons";
 
 const Footer = () => {
   return (
