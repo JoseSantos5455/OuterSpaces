@@ -14,87 +14,59 @@ const Todo = () => {
         />
       </div>
       <table>
-        <tr>
-          <th>
-            <TableHeader name="PRIORITY" />
-          </th>
-          <th>
-            <TableHeader name="TIMELINE" />
-          </th>
-          <th>DESCRIPTION</th>
-          <th>
-            <TableHeader name="COMPLETION" />
-          </th>
-          <th className="text-center">ACTION</th>
-        </tr>
-        <tr>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td>
-            <ButtonArray />
-          </td>
-        </tr>
-        <tr className="py-20px">
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td>
-            <ButtonArray />
-          </td>
-        </tr>
-        <tr>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td>
-            <ButtonArray />
-          </td>
-        </tr>
-        <tr>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td className="text-15px" text-white>
-            ddddd
-          </td>
-          <td>
-            <ButtonArray />
-          </td>
-        </tr>
+        <thead>
+          <tr>
+            <th className="font-normal">
+              <TableHeader name="PRIORITY" />
+            </th>
+            <th className="font-normal">
+              <TableHeader name="TIMELINE" />
+            </th>
+            <th className="font-normal">DESCRIPTION</th>
+            <th className="font-normal">
+              <TableHeader name="COMPLETION" />
+            </th>
+            <th className="text-center font-normal">ACTION</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td>
+              <ButtonArray />
+            </td>
+          </tr>
+          <tr className="py-20px">
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td>
+              <ButtonArray />
+            </td>
+          </tr>
+          <tr>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td>
+              <ButtonArray />
+            </td>
+          </tr>
+          <tr>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td className="text-15px">ddddd</td>
+            <td>
+              <ButtonArray />
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   );
