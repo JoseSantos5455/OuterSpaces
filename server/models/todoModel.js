@@ -13,10 +13,7 @@ const TodoSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  start_date: {
-    type: Date,
-  },
-  end_date: {
+  timeline: {
     type: Date,
   },
   created_at: {
