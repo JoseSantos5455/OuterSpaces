@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style.css";
 
 const Header = () => {
@@ -12,7 +12,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="flex justify-center items-center gap-[10px] text-[18px]">
-          <Link to="/todo">
+          <Link to="/Add">
             <button className="header-link">Main</button>
           </Link>
           <div className=" flex justify-center items-center gap-[10px]">
@@ -21,7 +21,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <Outlet />
     </div>
   );
 };
