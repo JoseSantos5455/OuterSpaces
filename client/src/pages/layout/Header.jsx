@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../style.css";
 
 const Header = () => {
@@ -21,7 +21,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      <Outlet />
     </div>
   );
 };

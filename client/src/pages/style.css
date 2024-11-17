@@ -51,3 +51,21 @@
   border-radius: 8px;
   border: none;
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  overflow-x: auto;
+}
+td {
+  border-bottom: 1px solid #f1f2f6;
+  padding: 10px 0;
+}
+
+th {
+  background-color: #f7fbfa;
+  font-size: 20px;
+  color: #2ca1c2;
+  text-align: left;
+  padding: 10px 0;
+}
