@@ -12,7 +12,7 @@ const Header = () => {
           </div>
         </Link>
         <div className="flex justify-center items-center gap-[10px] text-[18px]">
-          <Link to="/Add">
+          <Link to="/todo">
             <button className="header-link">Main</button>
           </Link>
           <div className=" flex justify-center items-center gap-[10px]">

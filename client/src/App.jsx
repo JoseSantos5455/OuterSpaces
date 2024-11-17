@@ -5,7 +5,6 @@ import Dashboard from "./pages/dashboard";
 import ToDo from "./pages/todo";
 import SignIn from "./pages/auth/signin";
 import SignUp from "./pages/auth/signup";
-import Add from "./pages/todo/Add";
 
 const App = () => {
   return (
@@ -18,7 +17,6 @@ const App = () => {
               <Route path="/todo" element={<ToDo />} />
               <Route path="/signin" element={<SignIn />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/Add" element={<Add />} />
             </Route>
           </Routes>
         </BrowserRouter>
