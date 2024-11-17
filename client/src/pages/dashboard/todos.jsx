@@ -26,7 +26,7 @@ const Todos = () => {
             {completed_items.map((item, idx) => (
               <div
                 key={idx}
-                className="text-[16px] bg-[#eeeeee] p-2 rounded-[10px]"
+                className="text-[16px]  bg-blue-100 bg-opacity-30 p-2 rounded-[10px]"
               >
                 {item.date}. {item.description}
               </div>
@@ -41,7 +41,7 @@ const Todos = () => {
             {todoy_items.map((item, idx) => (
               <div
                 key={idx}
-                className="text-[16px] bg-[#eeeeee] p-2 rounded-[10px]"
+                className="text-[16px] bg-blue-100 bg-opacity-30 p-2 rounded-[10px]"
               >
                 {item.date}. {item.description}
               </div>
@@ -56,7 +56,7 @@ const Todos = () => {
             {failed_items.map((item, idx) => (
               <div
                 key={idx}
-                className="text-[16px] bg-[#eeeeee] p-2 rounded-[10px]"
+                className="text-[16px] bg-blue-100 bg-opacity-30 p-2 rounded-[10px]"
               >
                 {item.date}. {item.description}
               </div>
