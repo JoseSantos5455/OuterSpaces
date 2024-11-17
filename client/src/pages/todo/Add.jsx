@@ -4,15 +4,14 @@ const Add = () => {
   const [todo, setTodo] = useState({
     priority: "",
     progress: "",
-    start_date: "",
-    end_date: "",
+    timeline: "",
     description: "",
   });
   const addItem = () => {
     console.log(todo);
   };
 
-  const handleClick = (e) => {
+  const handleChange = (e) => {
     setTodo({ ...todo, [e.target.name]: e.target.value });
   };
   return (
@@ -24,7 +23,7 @@ const Add = () => {
             type="text"
             name="priority"
             value={todo.priority}
-            onChange={handleClick}
+            onChange={handleChange}
             className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
             placeholder="e.g. 5.0"
           />
@@ -35,43 +34,31 @@ const Add = () => {
             type="text"
             name="progress"
             value={todo.progress}
-            onChange={handleClick}
+            onChange={handleChange}
             className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
             placeholder="0"
           />
         </div>
       </div>
-      <div className="w-[100%] md:w-[760px] grid grid-cols-2 gap-5 items-center">
-        <div className="flex flex-col gap-[20px]">
-          <p className="text-[24px] pl-5">
-            Timeline
-            <span className="text-[#d0d0d2] text-[20px] pl-5">from</span>
-          </p>
-          <input
-            type="date"
-            name="start_date"
-            value={todo.start_date}
-            onChange={handleClick}
-            className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
-          />
-        </div>
-        <div className="flex flex-col gap-[20px]">
-          <p className="text-[#d0d0d2] text-[20px] pl-5">to</p>
-          <input
-            type="date"
-            name="end_date"
-            value={todo.end_date}
-            onChange={handleClick}
-            className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
-          />
-        </div>
+      <div className="w-[100%] md:w-[760px] flex flex-col gap-[20px]">
+        <p className="text-[24px] pl-5">
+          Timeline
+          <span className="text-[#d0d0d2] text-[20px] pl-5">from</span>
+        </p>
+        <input
+          type="date"
+          name="timeline"
+          value={todo.timeline}
+          onChange={handleChange}
+          className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
+        />
       </div>
       <div className="flex flex-col gap-[20px] w-[100%] md:w-[760px]">
         <p className="text-[24px] pl-5">Description</p>
         <textarea
           name="description"
           value={todo.description}
-          onChange={handleClick}
+          onChange={handleChange}
           className="w-[100%] h-[200px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
           placeholder="type your description here."
         ></textarea>
