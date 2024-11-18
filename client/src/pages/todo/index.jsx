@@ -102,7 +102,7 @@ const Todo = () => {
               />
             </th>
             <th className="text-center font-normal bg-blue-100 bg-opacity-50">
-              Action
+              Action0
             </th>
           </tr>
         </thead>
