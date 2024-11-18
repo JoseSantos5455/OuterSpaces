@@ -38,7 +38,7 @@ const Add = () => {
             name="priority"
             value={todo.priority}
             onChange={handleChange}
-            className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6 outline-blue-500"
+            className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
             placeholder="e.g. 5.0"
           />
         </div>
