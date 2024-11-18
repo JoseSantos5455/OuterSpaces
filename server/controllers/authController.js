@@ -19,13 +19,14 @@ module.exports.signin = async (req, res, next) => {
 
 module.exports.signup = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, username } = req.body;
     const emailCheck = await User.findOne({ email });
     if (emailCheck)
       return res.send({ msg: "Email already used", status: false });
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = await User.create({
       email,
+      username,
       password: hashedPassword,
     });
     res.send("success");

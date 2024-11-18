@@ -16,8 +16,17 @@ const Header = () => {
             <button className="header-link">Main</button>
           </Link>
           <div className=" flex justify-center items-center gap-[10px]">
-            <button className="header-btn h-[40px] bg-blue-100">Sign In</button>
-            <button className="header-btn h-[40px] bg-blue-100">Sign Up</button>
+            <Link to="/signin">
+              <button className="header-btn h-[40px] bg-blue-100">
+                Sign In
+              </button>
+            </Link>
+
+            <Link to="/signup">
+              <button className="header-btn h-[40px] bg-blue-100">
+                Sign Up
+              </button>
+            </Link>
           </div>
         </div>
       </div>
