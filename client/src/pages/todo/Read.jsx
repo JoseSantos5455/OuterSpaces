@@ -1,19 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { server_url } from "../../util";
 
 const Read = () => {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { pathname } = useLocation();
+  const read_flag = pathname.includes("read");
   const [todo, setTodo] = useState({
     priority: "",
     progress: "",
     timeline: "",
     description: "",
   });
-  const addItem = () => {
-    console.log(todo);
+
+  useEffect(() => {
+    const readTodo = async () => {
+      try {
+        let res = await axios.get(`${server_url}/api/todo/read/${id}`);
+        setTodo(res.data);
+        console.log(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    readTodo();
+  }, [id]);
+
+  const handleOk = async () => {
+    try {
+      let res = await axios.put(`${server_url}/api/todo/update/${id}`, todo);
+      alert(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+    navigate(`/todo`);
   };
 
   const handleChange = (e) => {
     setTodo({ ...todo, [e.target.name]: e.target.value });
   };
+
   return (
     <div className="py-[50px] px-[20px] md:w-[100%] flex flex-col justify-center items-center gap-[40px]">
       <div className="w-[100%] md:w-[760px] block md:grid grid-cols-2 gap-5">
@@ -26,6 +54,7 @@ const Read = () => {
             onChange={handleChange}
             className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
             placeholder="e.g. 5.0"
+            readOnly={read_flag ? true : false}
           />
         </div>
         <div className="flex flex-col gap-[20px]">
@@ -37,6 +66,7 @@ const Read = () => {
             onChange={handleChange}
             className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
             placeholder="0"
+            readOnly={read_flag ? true : false}
           />
         </div>
       </div>
@@ -51,6 +81,7 @@ const Read = () => {
           value={todo.timeline}
           onChange={handleChange}
           className="w-[100%] h-[60px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
+          readOnly={read_flag ? true : false}
         />
       </div>
       <div className="flex flex-col gap-[20px] w-[100%] md:w-[760px]">
@@ -61,10 +92,11 @@ const Read = () => {
           onChange={handleChange}
           className="w-[100%] h-[200px] border-[#d0d0d2] border-[2px] rounded-[16px] py-4 px-6"
           placeholder="type your description here."
+          readOnly={read_flag ? true : false}
         ></textarea>
       </div>
       <div>
-        <button className="header-btn h-[40px] bg-blue-100" onClick={addItem}>
+        <button className="header-btn h-[40px] bg-blue-100" onClick={handleOk}>
           Ok
         </button>
       </div>

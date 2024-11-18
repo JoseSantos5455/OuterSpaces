@@ -1,19 +1,33 @@
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { server_url } from "../../util";
 
 const Add = () => {
+  const navigate = useNavigate();
   const [todo, setTodo] = useState({
     priority: "",
     progress: "",
     timeline: "",
     description: "",
   });
-  const addItem = () => {
-    console.log(todo);
+
+  const addItem = async () => {
+    if (todo.priority && todo.progress && todo.timeline && todo.description) {
+      try {
+        let res = await axios.post(`${server_url}/api/todo/add`, todo);
+        navigate("/todo");
+        alert(res.data);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   };
 
   const handleChange = (e) => {
     setTodo({ ...todo, [e.target.name]: e.target.value });
   };
+
   return (
     <div className="py-[50px] px-[20px] md:w-[100%] flex flex-col justify-center items-center gap-[40px]">
       <div className="w-[100%] md:w-[760px] block md:grid grid-cols-2 gap-5">
