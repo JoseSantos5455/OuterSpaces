@@ -24,7 +24,7 @@ module.exports.signup = async (req, res, next) => {
     if (emailCheck)
       return res.send({ msg: "Email already used", status: false });
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({
+    await User.create({
       email,
       username,
       password: hashedPassword,
