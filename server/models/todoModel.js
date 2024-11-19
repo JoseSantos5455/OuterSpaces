@@ -1,10 +1,6 @@
 const mongoose = require("mongoose");
 
 const TodoSchema = new mongoose.Schema({
-  userid: {
-    type: mongoose.Types.ObjectId,
-    required: true,
-  },
   priority: {
     type: Number,
     required: true,
