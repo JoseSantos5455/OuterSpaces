@@ -8,12 +8,12 @@ const Diagram = () => {
         id: "apexchart-example",
       },
       xaxis: {
-        categories: [1991, 1992, 1993],
+        categories: ["completed", "failed", "upcoming"],
       },
     },
     series: [
       {
-        name: "series-1",
+        name: "%",
         data: [25, 40, 35],
       },
     ],

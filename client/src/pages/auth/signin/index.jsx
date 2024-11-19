@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { server_url } from "../../../util";
 import Password from "../../../components/Password";
 import Username from "../../../components/Username";
-import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -17,11 +16,9 @@ const SignIn = () => {
     if (user.email && user.password) {
       try {
         let res = await axios.post(`${server_url}/api/auth/signin`, user);
-        // console.log(res.data);
         if (res.data.msg === "success") {
           alert("success");
           navigate("/todo");
-          console.log(res.data);
         } else {
           alert("failed");
         }
@@ -48,14 +45,6 @@ const SignIn = () => {
             state={[user, setUser]}
           />
         </div>
-        {/* <div>
-          <p className="text-gray text-[15px] pb-[5px]">Username</p>
-          <Username
-            placeholder="Enter your username"
-            name="username"
-            state={[user, setUser]}
-          />
-        </div> */}
         <div>
           <p className="text-gray text-[15px] pb-[5px]">Password</p>
           <Password name="password" state={[user, setUser]} />

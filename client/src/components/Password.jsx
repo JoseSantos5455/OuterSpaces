@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { HideeyeIcon, ShoweyeIcon } from "./Icons";
+
 const Password = ({ state, name }) => {
   let [user, setUser] = [...state];
-  let [val, setVal] = useState("");
+  const [val, setVal] = useState("");
   const [showed, setShowed] = useState(true);
 
   const handleClick = () => {
@@ -13,6 +14,7 @@ const Password = ({ state, name }) => {
     setUser({ ...user, [e.target.name]: e.target.value });
     setVal(e.target.value);
   };
+
   return (
     <div className="flex items-center ">
       <input

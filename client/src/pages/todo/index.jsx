@@ -24,14 +24,20 @@ const isProgress = {
 const Todo = () => {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [sortKey, setSortKey] = useState({ id: 0, flag: false });
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     const getList = async () => {
-      let res = await axios.post(`${server_url}/api/todo/getlist`);
+      let res = await axios.post(`${server_url}/api/todo/getlist`, {
+        sortKey,
+        keyword,
+      });
+      console.log(res.data);
       setData(res.data);
     };
     getList();
-  }, []);
+  }, [sortKey, keyword]);
 
   const readData = (id) => {
     navigate(`/todo/read/${id}`);
@@ -53,10 +59,8 @@ const Todo = () => {
     }
   };
 
-  const getSortList = async (sortKey) => {
-    let res = await axios.post(`${server_url}/api/todo/getlist`, sortKey);
-    console.log(res.data);
-    setData(res.data);
+  const getSortList = async (_sortKey) => {
+    setSortKey(_sortKey);
   };
 
   return (
@@ -68,6 +72,8 @@ const Todo = () => {
             type="text"
             placeholder="Search ..."
             className="border-none text-[18px] text-gray-500 outline-none"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
           />
         </div>
         <Link to="/todo/add">
@@ -102,7 +108,7 @@ const Todo = () => {
               />
             </th>
             <th className="text-center font-normal bg-blue-100 bg-opacity-50">
-              Action0
+              Action
             </th>
           </tr>
         </thead>
@@ -110,13 +116,13 @@ const Todo = () => {
           {data.map((val, idx) => (
             <tr key={idx}>
               <td className="text-[15px] pl-7">{val.priority}</td>
-              <td className="text-[15px]">{val.timeline}</td>
+              <td className="text-[15px]">{val.time}</td>
               <td className="text-[15px]">
                 {val.description.length > 30
                   ? val.description.substring(0, 30) + " ..."
                   : val.description}
               </td>
-              <td className="text-[15px]">{val.progress}</td>
+              <td className="text-[15px]">{val.progress}%</td>
               <td>
                 <ButtonArray
                   deleteData={() => deleteData(val._id)}

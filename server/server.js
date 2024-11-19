@@ -31,16 +31,16 @@ let allUsers = new Map();
 
 io.on("connection", (socket) => {
   socket.on("add-user", (userId) => {
-    let isNewUser = true;
-    for (let i = 0; i < allUsers.length; i++) {
-      if (allUsers.get(user_id) === userId) {
-        isNewUser = false;
-        break;
-      }
-    }
-    if (isNewUser) {
-      allUsers.set(userId, socket.id);
-    }
+    // let isNewUser = true;
+    // for (let i = 0; i < allUsers.length; i++) {
+    //   if (allUsers.keys(i) === userId) {
+    //     isNewUser = false;
+    //     break;
+    //   }
+    // }
+    // if (isNewUser) {
+    allUsers.set(userId, socket.id);
+    // }
   });
 
   socket.on("message", (message) => {

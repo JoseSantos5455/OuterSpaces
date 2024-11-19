@@ -2,7 +2,7 @@ import { useState } from "react";
 
 const Username = ({ state, name, placeholder }) => {
   let [user, setUser] = [...state];
-  let [val, setVal] = useState("");
+  const [val, setVal] = useState("");
 
   const changeInput = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });

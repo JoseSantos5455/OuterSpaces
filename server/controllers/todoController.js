@@ -1,30 +1,99 @@
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Types;
 const Todo = require("../models/todoModel");
+
+const getDate = () => {
+  let date = new Date();
+  let year = date.getFullYear();
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  return (
+    year +
+    "." +
+    (month < 10 ? "0" + month : month) +
+    "." +
+    (day < 10 ? "0" + day : day)
+  );
+};
 
 module.exports.getTodoList = async (req, res, next) => {
   try {
-    let todos;
-    let { id, flag } = req.body;
-    if (id === 1) {
-      if (flag) {
-        todos = await Todo.find({}).sort({ priority: 1 });
-      } else {
-        todos = await Todo.find({}).sort({ priority: -1 });
-      }
-    } else if (id === 2) {
-      if (flag) {
-        todos = await Todo.find({}).sort({ timeline: 1 });
-      } else {
-        todos = await Todo.find({}).sort({ timeline: -1 });
-      }
-    } else if (id === 3) {
-      if (flag) {
-        todos = await Todo.find({}).sort({ progress: 1 });
-      } else {
-        todos = await Todo.find({}).sort({ progress: -1 });
-      }
-    } else {
-      todos = await Todo.find({});
+    let todos,
+      pipeline = [];
+    let { sortKey, keyword } = req.body;
+    if (keyword) {
+      pipeline = pipeline.concat([
+        {
+          $addFields: {
+            time: {
+              $dateToString: {
+                date: "$timeline",
+                timezone: "+08:00",
+                format: "%Y.%m.%d",
+              },
+            },
+          },
+        },
+        {
+          $match: {
+            $or: [
+              {
+                description: {
+                  $regex: keyword,
+                },
+              },
+              {
+                time: {
+                  $regex: keyword,
+                },
+              },
+            ],
+          },
+        },
+      ]);
     }
+    if (sortKey) {
+      let { id, flag } = sortKey;
+      if (id === 1) {
+        if (flag) {
+          pipeline.push({ $sort: { priority: 1 } });
+        } else {
+          pipeline.push({ $sort: { priority: -1 } });
+        }
+      } else if (id === 2) {
+        if (flag) {
+          pipeline.push({ $sort: { timeline: 1 } });
+        } else {
+          pipeline.push({ $sort: { timeline: -1 } });
+        }
+      } else if (id === 3) {
+        if (flag) {
+          pipeline.push({ $sort: { progress: 1 } });
+        } else {
+          pipeline.push({ $sort: { progress: -1 } });
+        }
+      }
+    }
+    pipeline = pipeline.concat([
+      {
+        $addFields: {
+          time: {
+            $dateToString: {
+              date: "$timeline",
+              timezone: "+08:00",
+              format: "%Y.%m.%d",
+            },
+          },
+        },
+      },
+      {
+        $project: {
+          timeline: 0,
+          created_at: 0,
+        },
+      },
+    ]);
+    todos = await Todo.aggregate(pipeline);
     res.send(todos);
   } catch (e) {
     next(e);
@@ -33,19 +102,68 @@ module.exports.getTodoList = async (req, res, next) => {
 
 module.exports.getTodoListByCategory = async (req, res, next) => {
   try {
-    let completed_items = await Todo.find({
-      progress: 100,
-    });
-    let failed_items = await Todo.aggregate([
+    let completed_pipeline = [
+      { $match: { progress: 100 } },
+      {
+        $project: {
+          _id: 1,
+          description: 1,
+          timeline: 1,
+        },
+      },
+    ];
+    let today_pipeline = [
+      {
+        $addFields: {
+          time: {
+            $dateToString: {
+              date: "$timeline",
+              timezone: "+08:00",
+              format: "%Y.%m.%d",
+            },
+          },
+        },
+      },
+      {
+        $match: {
+          time: getDate(),
+        },
+      },
+      {
+        $project: {
+          _id: 1,
+          progress: 1,
+          description: 1,
+        },
+      },
+    ];
+    let failed_pipeline = [
       {
         $match: {
           progress: {
             $lt: 100,
           },
+          timeline: {
+            $lt: new Date(),
+          },
         },
       },
-    ]);
-    res.send({ completed_items: completed_items, failed_items: failed_items });
+      {
+        $project: {
+          _id: 1,
+          description: 1,
+          progress: 1,
+        },
+      },
+    ];
+    let completed_items = await Todo.aggregate(completed_pipeline);
+    let today_items = await Todo.aggregate(today_pipeline);
+    let failed_items = await Todo.aggregate(failed_pipeline);
+    res.send({
+      completed_items: completed_items,
+      today_items: today_items,
+      failed_items: failed_items,
+    });
   } catch (e) {
     next(e);
   }
@@ -65,8 +183,26 @@ module.exports.addTodo = async (req, res, next) => {
 
 module.exports.readTodo = async (req, res, next) => {
   try {
-    let todo = await Todo.findById(req.params.id);
-    res.send(todo);
+    let pipeline = [
+      {
+        $match: {
+          _id: new ObjectId(req.params.id),
+        },
+      },
+      // {
+      //   $addFields: {
+      //     timeline: {
+      //       $dateToString: {
+      //         date: "$timeline",
+      //         timezone: "+08:00",
+      //         format: "%Y.%m.%d",
+      //       },
+      //     },
+      //   },
+      // },
+    ];
+    let todos = await Todo.aggregate(pipeline);
+    res.send(todos[0]);
   } catch (e) {
     next(e);
   }

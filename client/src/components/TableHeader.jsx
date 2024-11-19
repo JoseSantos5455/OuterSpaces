@@ -3,6 +3,7 @@ import { SorttopIcon, SortdownIcon } from "./Icons";
 
 const TableHeader = ({ name, sortList, sort }) => {
   const [sortKey, setSortKey] = useState({ id: 1, flag: false });
+
   useEffect(() => {
     if (sort.id === 1) {
       setSortKey({ id: 1, flag: false });

@@ -19,8 +19,8 @@ const Read = () => {
     const readTodo = async () => {
       try {
         let res = await axios.get(`${server_url}/api/todo/read/${id}`);
-        setTodo(res.data);
         console.log(res.data);
+        setTodo(res.data);
       } catch (e) {
         console.log(e);
       }
@@ -32,10 +32,10 @@ const Read = () => {
     try {
       let res = await axios.put(`${server_url}/api/todo/update/${id}`, todo);
       alert(res.data);
+      navigate("/todo");
     } catch (e) {
       console.log(e);
     }
-    navigate(`/todo`);
   };
 
   const handleChange = (e) => {
