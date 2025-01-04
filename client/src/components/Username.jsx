@@ -6,6 +6,7 @@ const Username = ({ state, name, placeholder }) => {
 
   const changeInput = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
+    console.log(e.target.value);
     setVal(e.target.value);
   };
 

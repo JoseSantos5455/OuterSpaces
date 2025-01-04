@@ -19,6 +19,7 @@ const SignIn = () => {
       try {
         delete user.passconfirm;
         let res = await axios.post(`${server_url}/api/auth/signup`, user);
+        console.log(res.data);
         if (res.data === "success") {
           alert("success");
           navigate("/signin");

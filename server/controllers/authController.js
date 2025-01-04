@@ -34,3 +34,19 @@ module.exports.signup = async (req, res, next) => {
     next(error);
   }
 };
+
+module.exports.getlist = async (req, res) => {
+  try {
+    const { email, password, username } = req.body;
+    const getItem = await User.findOne({ username });
+    if (getItem) return res.send({ msg: "already username", status: false });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await User.create({
+      email,
+      username,
+      password: hashedPassword,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
