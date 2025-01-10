@@ -6,6 +6,7 @@ const initialState = {
   isLoggedIn: false,
   login: () => {},
   logout: () => {},
+  logout: () => {},
 };
 
 // ==============================|| CONFIG CONTEXT & PROVIDER ||============================== //
