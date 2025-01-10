@@ -13,6 +13,7 @@ function mongooseConnection() {
       .catch((err) => console.log(err));
   } catch (e) {
     console.log("could not connect");
+    console.log("could not connect");
   }
   const dbConnection = mongoose.connection;
   dbConnection.on("error", (err) => console.log(`Connection error ${err}`));
