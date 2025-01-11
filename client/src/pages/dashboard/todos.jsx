@@ -6,7 +6,6 @@ const Todos = () => {
   const [completedItems, setCompletedItems] = useState([]);
   const [todayItems, setTodayItems] = useState([]);
   const [failedItems, setFailedItems] = useState([]);
-  const [failedItems, setFailedItems] = useState([]);
 
   useEffect(() => {
     const getList = async () => {
