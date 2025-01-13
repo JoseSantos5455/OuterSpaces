@@ -11,7 +11,6 @@ const getDate = () => {
     year +
     "." +
     (month < 10 ? "0" + month : month) +
-    (month < 10 ? "0" + month : month) +
     "." +
     (day < 10 ? "0" + day : day)
   );
