@@ -1,3 +1,3 @@
 # Outerspace👈
 
-![dashboard] (/client/public/images/dashboard.img)
+![dashboard] (/client/public/img/readme.png)
